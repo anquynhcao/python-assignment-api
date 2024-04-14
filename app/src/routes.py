@@ -1,13 +1,17 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
 from .models import Event
+import json
 
 router = APIRouter()
 
 
 @router.get("/events", response_model=List[Event])
 async def get_all_events():
-    pass
+    with open("event.json", "r") as file:
+        events_data = json.load(file)
+    return events_data
+    
 
 
 @router.get("/events/filter", response_model=List[Event])
