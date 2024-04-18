@@ -18,5 +18,25 @@
         ],
         "location": "Budapest, Hungary",
         "max_attendees": 100
+    },
+    {
+        "id": 0,
+        "name": "string",
+        "date": "string",
+        "organizer": {
+            "name": "string",
+            "email": "string"
+        },
+        "status": "string",
+        "type": "string",
+        "joiners": [
+            {
+                "name": "string",
+                "email": "string",
+                "country": "string"
+            }
+        ],
+        "location": "string",
+        "max_attendees": 0
     }
 ]
