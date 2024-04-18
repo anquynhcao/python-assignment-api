@@ -15,7 +15,7 @@ async def get_all_events():
 
 @router.get("/events/filter", response_model=List[Event])
 async def get_events_by_filter(
-    date: Optional[str] = Query(None, description ="Filter events by date"),
+    date: Optional[str] = Query(None, alias="yyyy-mm-dd", description ="Filter events by date"),
     organizer: Optional[str] = Query(None, description="Filter events by organizer's name"),
     status: Optional[str] = Query(None, description="Filter events by status"),
     event_type: Optional[str] = Query(None, description="Filter events by type")
