@@ -21,27 +21,27 @@
     },
     {
         "id": 0,
-        "name": "supdate1",
-        "date": "string",
+        "name": "test0",
+        "date": "2020-10-10",
         "organizer": {
-            "name": "string",
-            "email": "string"
+            "name": "orga",
+            "email": "o@mail"
         },
-        "status": "string",
-        "type": "string",
+        "status": "status",
+        "type": "testorganizer",
         "joiners": [
             {
-                "name": "string2",
-                "email": "string",
-                "country": "string"
+                "name": "John",
+                "email": "john@",
+                "country": "vietnam"
             }
         ],
-        "location": "string",
-        "max_attendees": 0
+        "location": "Budapest",
+        "max_attendees": 50
     },
     {
-        "id": 3,
-        "name": "supdate1",
+        "id": 5,
+        "name": "string",
         "date": "string",
         "organizer": {
             "name": "string",
@@ -51,12 +51,12 @@
         "type": "string",
         "joiners": [
             {
-                "name": "string",
-                "email": "string3",
-                "country": "string"
+                "name": "John",
+                "email": "john@",
+                "country": "vietnam"
             }
         ],
         "location": "string",
-        "max_attendees": 0
+        "max_attendees": 10
     }
 ]
