@@ -31,7 +31,7 @@
         "type": "string",
         "joiners": [
             {
-                "name": "string",
+                "name": "string2",
                 "email": "string",
                 "country": "string"
             }
@@ -52,7 +52,7 @@
         "joiners": [
             {
                 "name": "string",
-                "email": "string",
+                "email": "string3",
                 "country": "string"
             }
         ],

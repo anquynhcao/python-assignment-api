@@ -1,9 +1,11 @@
+from .event_analyzer import EventAnalyzer
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from .models import Event
 import json
 from .file_storage import EventFileManager, Event
 router = APIRouter()
+
 
 
 @router.get("/events", response_model=List[Event])
@@ -41,7 +43,7 @@ async def get_event_by_id(event_id: int):
             if event["id"] == event_id:
                 return event
 
-        raise HTTPException(detail="Event not found", status_code=404)
+        raise Exception("Event not found")
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
 
@@ -53,7 +55,7 @@ async def create_event(event: Event):
         
         for exist_event in events_data:
             if exist_event["id"] == event.id:
-                raise HTTPException(status_code=400, detail="Event ID already exists")
+                raise Exception("Event ID already exists")
 
         event_dict = json.loads(json.dumps(event, default=lambda o: o.__dict__))
         events_data.append(event_dict)
@@ -62,7 +64,7 @@ async def create_event(event: Event):
 
         return event
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.put("/events/{event_id}", response_model=Event)
@@ -79,9 +81,9 @@ async def update_event(event_id: int, event: Event):
                 EventFileManager.write_events_to_file(events_data)
                 return exist_event
 
-        raise HTTPException(status_code=404, detail="Event not found")
+        raise Exception("Event not found")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e))
     
     
     
@@ -97,12 +99,22 @@ async def delete_event(event_id: int):
                 EventFileManager.write_events_to_file(events_data)
                 return {"message": "Events deleted successfully"}
         
-        raise HTTPException(status_code=404, detail="Event not found")
+        raise Exception("Event not found")
     
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e))
 
 
 @router.get("/events/joiners/multiple-meetings")
 async def get_joiners_multiple_meetings():
-    pass
+    try:
+        events_data = EventFileManager.read_events_from_file() #return dict
+        events = [Event(**event_data) for event_data in events_data] #turn list dict to list obj E
+        joiners_multi = EventAnalyzer.get_joiner_multiple_meetings_method(events)
+
+        if not joiners_multi:
+            return {"message": "No joiners attending at least 2 meetings"}
+        return joiners_multi
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
