@@ -11,6 +11,8 @@ class EventFileManager:
         try:
             with open(cls.FILE_PATH, "r") as file:
                 events_data = json.load(file)
+                # print(type(events_data[0]))
+                # type dict
                 return events_data
         except FileNotFoundError:
             return []
@@ -23,6 +25,7 @@ class EventFileManager:
         try:
             with open(cls.FILE_PATH, "w") as file:
                 json.dump(events, file, indent=4)
+
         except Exception as e:
             print(f"Error writing events file: {e}")
         
